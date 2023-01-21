@@ -6,6 +6,9 @@ const app = express();
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }))
+
 //using Layouts
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
