@@ -6,11 +6,19 @@ module.exports.profile = (req,res)=>{
 }
 
 module.exports.signIn = (req,res)=>{
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     return res.render('users_sign_in',{
         title:"signIn"
     });
 }
 module.exports.signUp = (req,res)=>{
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     return res.render('users_sign_up',{
         title:"signIn"
     });

@@ -33,6 +33,7 @@ app.set('view engine','ejs');
 app.set('views','./views');
 
 app.use(session({
+    name:"Codieal",
     secret: 'keyboard',
     resave: false,
     saveUninitialized: false,
@@ -44,6 +45,8 @@ app.use(session({
 //   https://www.npmjs.com/package/passport refer this 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 
 //using middleware to use router
 app.use('/',require('./routes'));

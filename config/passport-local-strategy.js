@@ -33,4 +33,25 @@ passport.deserializeUser(function(id, cb) {
     })
 });
 
+//checking user is Authenticated
+passport.checkAuthentication = (req,res,next)=>{
+    // isAuthenticated is an in-built function provided by passport
+    if(req.isAuthenticated()){ 
+        return next(); // if valid user, then request pass to controller action
+    }
+    return res.redirect('sign-in');
+}
+
+passport.setAuthenticatedUser = (req,res,next)=>{
+    if(req.isAuthenticated()){
+        //for every request passport send user data in req.user
+        res.locals.user = req.user; // Storing user data in locals for views(ejs) 
+    }
+    return next();
+}
+
+
+// ****NOTE*****
+// checkAuthentication & setAuthenticatedUser func's created for Authentication purpose
+// (To view profile page only when user logged in) 
 module.exports = passport;
