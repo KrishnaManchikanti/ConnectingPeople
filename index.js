@@ -2,6 +2,8 @@ const express = require('express');
 const port = 8000;
 const app = express();
 
+const MongoStore = require('connect-mongo');
+
 //session cookies
 const session = require('express-session');
 const passport = require('passport');
@@ -39,7 +41,9 @@ app.use(session({
     saveUninitialized: false,
     cookie: { 
         maxAge:(1000 * 60 * 100)
-     }
+     },
+     store: new MongoStore({ mongoUrl: 'mongodb://127.0.0.1:27017/codeial', autoRemove:'disabled' },
+     (err)=>{ console.log(err||'connected to mongo-store');return;})
   }));
 
 //   https://www.npmjs.com/package/passport refer this 
