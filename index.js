@@ -4,6 +4,8 @@ const app = express();
 
 const MongoStore = require('connect-mongo');
 
+const sassMiddleware = require('node-sass-middleware');
+
 //session cookies
 const session = require('express-session');
 const passport = require('passport');
@@ -26,6 +28,15 @@ const db = require('./config/mongoose');
 //Telling layouts to move style-tag into the head & script-tag at the bottom
 app.set("layout extractScripts", true);
 app.set("layout extractStyles", true);
+
+app.use(sassMiddleware({
+    /* Options */
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: true,
+    outputStyle: 'extended',
+    prefix:  '/css'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+}));
 
 //Using static files
 app.use(express.static('assets'));
