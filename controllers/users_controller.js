@@ -47,3 +47,10 @@ module.exports.create = (req,res)=>{
 module.exports.createSession = (req,res)=>{
     return res.redirect('/');
 }
+
+module.exports.destroySession = (req,res,next)=>{
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+}
