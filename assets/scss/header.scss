@@ -1,0 +1,26 @@
+$font-size: 25px;
+
+#header{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+    border: 2px solid black;
+    background-color:lightyellow;
+    a{
+        text-decoration: none;
+        font-size: $font-size;
+    }
+    h2{
+        margin-left: 5px;
+        font-size: $font-size;
+    }
+    ul{
+       li{
+        display: inline;
+        align-items: flex-end;
+        padding: 20px;
+        
+       } 
+    }
+}

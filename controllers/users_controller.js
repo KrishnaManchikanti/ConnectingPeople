@@ -20,7 +20,7 @@ module.exports.signUp = (req,res)=>{
     }
 
     return res.render('users_sign_up',{
-        title:"signIn"
+        title:"signUp"
     });
 }
 

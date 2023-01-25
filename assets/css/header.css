@@ -1,0 +1,17 @@
+#header {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  border: 2px solid black;
+  background-color: lightyellow; }
+  #header a {
+    text-decoration: none;
+    font-size: 25px; }
+  #header h2 {
+    margin-left: 5px;
+    font-size: 25px; }
+  #header ul li {
+    display: inline;
+    align-items: flex-end;
+    padding: 20px; }
