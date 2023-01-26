@@ -39,7 +39,7 @@ passport.checkAuthentication = (req,res,next)=>{
     if(req.isAuthenticated()){ 
         return next(); // if valid user, then request pass to controller action
     }
-    return res.redirect('sign-in');
+    return res.redirect('/users/sign-in');
 }
 
 passport.setAuthenticatedUser = (req,res,next)=>{
