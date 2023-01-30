@@ -1,4 +1,6 @@
 footer {
+  position: fixed;
+  top: 95%;
   padding: 5px;
   display: flex;
   height: 50px;

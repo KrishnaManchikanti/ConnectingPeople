@@ -1,8 +1,14 @@
 body{
-    margin: 0px;
-    text-align: center;
+    margin: 0;
+    /* text-align: center; */
+
     #layout-main{
         height: 100%;
     }
-    
+    #posts-list-container{
+        margin: 5px;
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+  
 }

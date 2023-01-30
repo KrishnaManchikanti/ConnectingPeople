@@ -1,5 +1,7 @@
 $font-size: 20px;
 footer{
+    position: fixed;
+    top: 95%;
     padding: 5px;
     display: flex;
     height: 50px;
@@ -7,6 +9,7 @@ footer{
     border: 2px solid black;
     background-color:darkseagreen;
     font-size: $font-size;
+    
     ul{
         margin-top: -4px;
         list-style-type:none;
