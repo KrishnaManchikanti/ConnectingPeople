@@ -6,7 +6,7 @@
     <ul id="headerlinks">
         <%if(locals.user){%>
             <li>
-                <a href="/users/profile"><%=user.name%></a>
+                <a href="/users/profile/<%= locals.user.id%>"><%=user.name%></a>
             </li>
             <li>
                 <a href="/users/sign-out">signOut</a>
