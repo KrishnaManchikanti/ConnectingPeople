@@ -1,41 +1,34 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
 
-module.exports.create = (req,res)=>{
-    Post.findById(req.body.post,(err, post)=>{
+module.exports.create = async (req,res)=>{
+    try {
+        let post = await Post.findById(req.body.post);
         if(post){
-            Comment.create({
+            let comment = await Comment.create({
                 content: req.body.content,
                 user:req.user._id,
                 post:req.body.post
-            }, function(err, comment){
-                if(err){console.log("err in creating comment",err);return;}
-                post.comments.push(comment);
-                post.save();
-                res.redirect('/');
             });
+            post.comments.push(comment);
+            post.save();
+            res.redirect('/');
         }
-    });
+    } catch (error) {
+        console.log('Error',error);
+    }
 }
 
-module.exports.destroy = (req,res)=>{
-    
-    Comment.findById(req.params.id,(err,comment)=>{
+module.exports.destroy = async (req,res)=>{
+    try {
+        let comment = await Comment.findById(req.params.id);
         if(comment.user == req.user.id){
             let postId = comment.post;
             comment.remove();
-                
-            Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}},(err,post)=>{
-                if(err){console.log("error in find post")};
-                return res.redirect('back');
-            });
-// Post.findById(postId,(err,post)=>{
-//     if(err){console.log("error in find post")};
-//     post.comments.pop(req.params.id);
-//     post.save();
-// }) 
-        }else{
-            return res.redirect('back');
-        }
-    });
+            await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});//post.comments.pop(req.params.id);  
+        };
+        return res.redirect('back');
+    } catch (error) {
+        console.log("error in find post",error);
+    }
 }
