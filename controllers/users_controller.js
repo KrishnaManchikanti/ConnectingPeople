@@ -1,4 +1,16 @@
 const User = require('../models/user');
+
+module.exports.profileUpdate = (req,res)=>{
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id,req.body,(err,user)=>{
+            return res.redirect('/');
+        })
+    }else{
+        return res.status(401).send('UnAuthorized');
+    }
+    
+}
+
 module.exports.profile = (req,res)=>{
     User.findById(req.params.id,(err, user)=>{
         return res.render('users_profile',{
