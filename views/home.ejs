@@ -1,8 +1,6 @@
+<link rel="stylesheet" href="css/home.css">
 
-<h1> 
-    Codeial / <%= title %>
-</h1>
-
+<div id="home-container">
     <section id="feed-posts">
         <h4>Posts</h4>
         <% if(locals.user){ %>
@@ -23,7 +21,7 @@
         </div>
     </section>
 
-    <section>
+    <section id="friends-list">
         <h4>Friends</h4>
         <div id="users-list-container">
             <ul>
@@ -35,3 +33,7 @@
             </ul>
         </div>
     </section>
+</div>
+    
+
+    
