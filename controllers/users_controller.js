@@ -1,5 +1,4 @@
 const User = require('../models/user');
-
 module.exports.profileUpdate = (req,res)=>{
     if(req.user.id == req.params.id){
         User.findByIdAndUpdate(req.params.id,req.body,(err,user)=>{
@@ -60,12 +59,15 @@ module.exports.create = (req,res)=>{
 }
 
 module.exports.createSession = (req,res)=>{
+    req.flash('success', 'Logged In');//to send req.flash data to res we used middleware
+// we are not able to access this flash msg in our template, so we have created a customMware
     return res.redirect('/');
 }
 
 module.exports.destroySession = (req,res,next)=>{
     req.logout(function(err) {
         if (err) { return next(err); }
+        req.flash('success', 'Logged out');
         res.redirect('/');
       });
 }

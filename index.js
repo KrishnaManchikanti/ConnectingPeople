@@ -10,7 +10,9 @@ const sassMiddleware = require('node-sass-middleware');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-
+//flash
+var flash = require('connect-flash');
+var customMware = require('./config/middleware');
 //cookie-parser
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -62,7 +64,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
-
+//flash
+app.use(flash());
+app.use(customMware.setflash);
 //using middleware to use router
 app.use('/',require('./routes'));
 
