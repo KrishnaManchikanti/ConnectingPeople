@@ -12,6 +12,7 @@ module.exports.create = async (req,res)=>{
             });
             post.comments.push(comment);
             post.save();
+            req.flash('success', 'Comment Created');
             res.redirect('/');
         }
     } catch (error) {
@@ -26,6 +27,7 @@ module.exports.destroy = async (req,res)=>{
             let postId = comment.post;
             comment.remove();
             await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});//post.comments.pop(req.params.id);  
+            req.flash('success', 'Comment Deleted');
         };
         return res.redirect('back');
     } catch (error) {

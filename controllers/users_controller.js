@@ -2,6 +2,7 @@ const User = require('../models/user');
 module.exports.profileUpdate = (req,res)=>{
     if(req.user.id == req.params.id){
         User.findByIdAndUpdate(req.params.id,req.body,(err,user)=>{
+            req.flash('success', 'Profile Updated');
             return res.redirect('/');
         })
     }else{
@@ -49,10 +50,12 @@ module.exports.create = (req,res)=>{
         if(!user){
             User.create(req.body, function(err,user){
                 if(err){console.log('err in Creating user in signup');return;}
+                req.flash('success', 'User Created');
                 return res.redirect('/users/sign-in');
             });
         }else{
             console.log("user a;ready exits");
+            req.flash('error', 'User Already Exists');
             return res.redirect('/users/sign-in');
         }
     });

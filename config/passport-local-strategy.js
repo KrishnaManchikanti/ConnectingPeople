@@ -4,12 +4,15 @@ var LocalStrategy = require('passport-local');
 const User = require('../models/user');
 // https://www.passportjs.org/howtos/password/ refer this 
 passport.use(new LocalStrategy({
-        usernameField:'email'
+        usernameField:'email',
+        passReqToCallback: true
     },
-    function verify(email, password, cb) {
+    function verify(req, email, password, cb) {
         User.findOne({email:email}, function(err,user){
             if (err) { return cb(err); }
-            if (!user || user.password!=password) { return cb(null, false, { message: 'Incorrect username or password.' }); }
+            if (!user || user.password!=password) { 
+                req.flash('error', 'Incorrect User/Password');
+                return cb(null, false, { message: 'Incorrect username or password.' }); }
 
             return cb(null, user);
         });

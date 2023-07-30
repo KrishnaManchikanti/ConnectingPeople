@@ -7,6 +7,7 @@ module.exports.create = async (req,res)=>{
             content: req.body.content,
             user: req.user._id
         });
+        req.flash('success', 'Post Created');
         return res.redirect('back');
 
     } catch (error) {
@@ -20,6 +21,7 @@ module.exports.destroy = async (req,res)=>{
         if(post.user == req.user.id){
             post.remove();//removing whole collection in db(mongoose)
             await Comments.deleteMany({post:req.params.id});
+            req.flash('success', 'Post Removed');
         }
         return res.redirect('back');
     } catch (error) {
