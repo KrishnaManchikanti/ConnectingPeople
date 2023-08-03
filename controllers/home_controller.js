@@ -10,6 +10,8 @@ module.exports.home = async (req,res)=>{
         path:'comments',
         populate:{
             path:'user'
+        },options: {
+            sort: { createdAt: -1 } // Sort comments by 'createdAt' in descending order
         }
     })
 
