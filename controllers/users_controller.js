@@ -1,14 +1,38 @@
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.profileUpdate = async (req,res)=>{
-    let user = await User.findById(req.params.id);
+    
     if(req.user.id == req.params.id){
         try{
+            let user = await User.findById(req.params.id);
             User.uplodedAvatar (req, res, function(error){
                 if(error){console.log(`err in multer`,error);}
-                if(req.file){
-                    console.log(req.body.avatar);
-                    user.avatar = User.avatarPath+'/'+req.file.filename;
+
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                // Assuming user.avatar contains the relative path of the existing avatar
+                if (req.file) {
+                    if (user.avatar) {
+                    // Constructing the full path of the existing avatar
+                    const existingAvatarPath = path.join(__dirname, '..', user.avatar);
+                    // Checking if the file exists before attempting to delete it
+                        if (fs.existsSync(existingAvatarPath)) {
+                            try {
+                            // If the file exists, delete it
+                                fs.unlinkSync(existingAvatarPath);
+                                console.log('Existing avatar deleted successfully!');
+                            } catch (err) {
+                                console.error('Error deleting existing avatar:', err);
+                            }
+                        } else {
+                            console.log('Existing avatar does not exist.');
+                        }
+                    }
+                    // Update the user.avatar with the new path
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
                 }
                 user.save();
                 req.flash('success', 'Profile Updated');

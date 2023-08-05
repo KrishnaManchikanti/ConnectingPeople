@@ -47,6 +47,7 @@ app.use(express.static('assets'));
 app.set('view engine','ejs');
 app.set('views','./views');
 
+app.use('/uploads', express.static(__dirname+ '/uploads'));
 app.use(session({
     name:"Codieal",
     secret: 'keyboard',
