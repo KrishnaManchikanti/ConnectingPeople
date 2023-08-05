@@ -3,19 +3,21 @@ const User = require('../models/user');
 module.exports.profileUpdate = async (req,res)=>{
     let user = await User.findById(req.params.id);
     if(req.user.id == req.params.id){
-        User.uplodedAvatar (req, res, function(error){
-            if(error){console.log(`err in multer`,error);}
-            if(req.file){
-                console.log(req.body.avatar);
-                user.avatar = User.avatarPath+'/'+req.file.filename;
-            }
-            user.save();
-            req.flash('success', 'Profile Updated');
+        try{
+            User.uplodedAvatar (req, res, function(error){
+                if(error){console.log(`err in multer`,error);}
+                if(req.file){
+                    console.log(req.body.avatar);
+                    user.avatar = User.avatarPath+'/'+req.file.filename;
+                }
+                user.save();
+                req.flash('success', 'Profile Updated');
+                return res.redirect('back');
+            });
+        }catch(error){
+            req.flash('error',error);
             return res.redirect('back');
-        });
-    }else{
-        return res.status(401).send('UnAuthorized');
-    } 
+        }
 }
 
 module.exports.profile = (req,res)=>{
