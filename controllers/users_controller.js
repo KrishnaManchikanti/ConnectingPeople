@@ -18,6 +18,7 @@ module.exports.profileUpdate = async (req,res)=>{
             req.flash('error',error);
             return res.redirect('back');
         }
+    }
 }
 
 module.exports.profile = (req,res)=>{
