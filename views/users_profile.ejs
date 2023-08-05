@@ -6,9 +6,10 @@
         <p><%=profile_user.email%></p>  
         
         <%if(locals.user.id == profile_user.id){%>
-                <form action="/users/profileUpdate/<%=profile_user.id%>" method="post">
-                        <input type="name" name="name" >
-                        <input type="email" name="email" >
-                        <input type="submit" >
+                <form action="/users/profileUpdate/<%=profile_user.id%>"  enctype="multipart/form-data" method="post">
+                        <input type="name" name="name" value="<%=profile_user.name%>">
+                        <input type="email" name="email" value="<%=profile_user.email%>">
+                        <input type="file" name="avatar" placeholder="photo">
+                        <input type="submit" value="update">
                 </form>
         <%}%>
