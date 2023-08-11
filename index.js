@@ -10,6 +10,8 @@ const sassMiddleware = require('node-sass-middleware');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWt = require('./config/passport-jwt-startegy');
+const GoogleStrategy = require('./config/passport-google-oauth2-strategy').Strategy;
 //flash
 var flash = require('connect-flash');
 var customMware = require('./config/middleware');
